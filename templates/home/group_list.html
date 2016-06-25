@@ -6,7 +6,7 @@
 <div class="container">
 <h3>View Your Groups</h3>
 {% for group in object_list %}
-  <p>{{ group.name  }}</p>
+  <p><a href="{% url 'group_detail' group.pk %}">{{ group.name  }}</a></p>
 {% endfor %}
 </div>
 {% endblock %}

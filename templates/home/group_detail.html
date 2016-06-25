@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ object.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h3>{{ object.name }}</h3>
+  <p>{{ object.description }}</p>
+  <br><br>
+  <h4>Events:</h4>
+  {% for event in events %}
+    <p>{{ event.name }}</p>
+  {% endfor %}
+  <a href="{% url 'create_event' object.pk %}" class="waves-effect waves-light btn">Add Event</a>
+</div>
+{% endblock %}

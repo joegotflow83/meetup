@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Event{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h3>Create Event</h3>
+  <form method="post" action="">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Add Event" class="waves-effect waves-light btn">
+  </form>
+</div>
+{% endblock %}
