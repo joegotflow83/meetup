@@ -4,4 +4,5 @@
 
 {% block content %}
 <h3>Welcome {{ user }}</h3>
+<a href="{% url 'user_view_groups' %}" class="waves-effect waves-light btn">Your Groups</a>
 {% endblock %}

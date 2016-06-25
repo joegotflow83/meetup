@@ -1,4 +1,4 @@
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, ListView, DetailView
 from django.core.urlresolvers import reverse
 
 from .models import Group
@@ -12,7 +12,7 @@ class Home(TemplateView):
 class CreateGroup(CreateView):
     """Users can create groups"""
     model = Group
-    fields = ('name', 'description', 'location', 'meet_date', 'meet_time')
+    fields = ('name', 'description')
 
     def form_valid(self, form):
         new_group = form.save(commit=False)
@@ -22,3 +22,19 @@ class CreateGroup(CreateView):
 
     def get_success_url(self):
         return reverse('home')
+
+
+class UserViewGroups(ListView):
+    """User can view the groups they have created"""
+    model = Group
+
+    def get_queryset(self):
+        return Group.objects.filter(user=self.request.user)
+
+
+class GroupDetails(DetailView):
+    """Users can view the groups with all the events they have created with that group"""
+    model = Group
+
+    def get_queryset(self):
+        return Group.objects.get(pk=self.kwargs['pk'])

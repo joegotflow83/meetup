@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}View Groups{% endblock %}
+
+{% block content %}
+<div class="container">
+<h3>View Your Groups</h3>
+{% for group in object_list %}
+  <p>{{ group.name  }}</p>
+{% endfor %}
+</div>
+{% endblock %}
