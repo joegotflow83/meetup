@@ -9,7 +9,7 @@
   <br><br>
   <h4>Events:</h4>
   {% for event in events %}
-    <p>{{ event.name }}</p>
+    <p><a href="{% url 'event_detail' event.pk %}">{{ event.name }}</a></p>
   {% endfor %}
   <a href="{% url 'create_event' object.pk %}" class="waves-effect waves-light btn">Add Event</a>
 </div>

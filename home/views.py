@@ -36,9 +36,6 @@ class GroupDetail(DetailView):
     """Users can view groups in detail"""
     model = Group
 
-    def get_queryset(self):
-        return Group.objects.filter(pk=self.kwargs['pk'])
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['events'] = Event.objects.filter(group=self.kwargs['pk'])
@@ -60,3 +57,23 @@ class CreateEvent(CreateView):
 
     def get_success_url(self):
         return reverse('group_detail', kwargs={'pk': self.kwargs['pk']})
+
+
+class EventDetail(DetailView):
+    model = Event
+
+
+class GroupList(ListView):
+    """Users can view all groups to find one they want to join"""
+    model = Group
+    template_name = 'home/all_groups.html'
+
+
+class GuestGroupDetail(DetailView):
+    model = Group
+    template_name = 'home/guest_group_detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['event'] = Event.objects.filter(group=self.kwargs['pk']).order_by('-created')[:1]
+        return context

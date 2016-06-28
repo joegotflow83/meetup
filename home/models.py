@@ -20,4 +20,5 @@ class Event(models.Model):
     location = models.CharField(max_length=512)
     meet_date = models.DateTimeField()
     meet_time = models.CharField(max_length=10)
-    members = models.ManyToManyField(Member)
+    created = models.DateTimeField(auto_now_add=True)
+    members = models.ManyToManyField(Member, blank=True)
